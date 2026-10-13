@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>صانع الاختبارات السحري – رياضيات التاسع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--bg:#f3f0ff;--tx:#1e1646;--mut:#6a6296;--card:rgba(255,255,255,.74);--bd:rgba(124,58,237,.2);--chip:rgba(255,255,255,.85);--g1:rgba(139,92,246,.32);--g2:rgba(6,182,212,.24);--g3:rgba(244,114,182,.26);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0a22;--tx:#f2edff;--mut:#b3aadf;--card:rgba(255,255,255,.07);--bd:rgba(255,255,255,.13);--chip:rgba(255,255,255,.06);--g1:rgba(139,92,246,.38);--g2:rgba(6,182,212,.26);--g3:rgba(244,114,182,.24)}}
+:root[data-theme="dark"]{--bg:#0c0a22;--tx:#f2edff;--mut:#b3aadf;--card:rgba(255,255,255,.07);--bd:rgba(255,255,255,.13);--chip:rgba(255,255,255,.06);--g1:rgba(139,92,246,.38);--g2:rgba(6,182,212,.26);--g3:rgba(244,114,182,.24)}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:'Cairo',Tahoma,Arial,sans-serif;color:var(--tx);background:radial-gradient(60% 40% at 95% 0%,var(--g1),transparent),radial-gradient(50% 40% at 0% 35%,var(--g2),transparent),radial-gradient(60% 50% at 85% 100%,var(--g3),transparent),var(--bg);background-attachment:fixed;min-height:100vh;padding-bottom:96px}
+.wrap{max-width:980px;margin:auto;padding:18px 14px}
+.hero{text-align:center;padding:22px 8px 8px}
+.hero h1{margin:0;font-size:clamp(26px,6vw,42px);font-weight:900;background:linear-gradient(90deg,#8b5cf6,#06b6d4,#f472b6,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 18px rgba(139,92,246,.35))}
+.hero p{color:var(--mut);margin:6px 0 0;font-size:15px}
+.step{display:flex;align-items:center;gap:10px;margin:26px 0 12px;font-weight:900;font-size:20px}
+.step b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#f472b6);color:#fff;box-shadow:0 0 18px #8b5cf6aa}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 34px -16px rgba(80,40,160,.45)}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.tab{font:inherit;color:var(--tx);cursor:pointer;text-align:center;padding:12px 8px;border-radius:18px;border:1px solid var(--bd);background:var(--card);transition:.25s;display:flex;flex-direction:column;gap:2px;align-items:center}
+.tab b{font-size:24px}.tab span{font-weight:700;font-size:14px}.tab small{color:var(--mut);font-size:11.5px;line-height:1.3}
+.tab.on{background:linear-gradient(135deg,var(--c),var(--c2));color:#fff;border-color:transparent;box-shadow:0 10px 28px -8px var(--c);transform:translateY(-2px)}
+.tab.on small{color:#fffd}
+#lessons{display:grid;gap:12px;margin-top:14px}
+.les{padding:14px;border-inline-start:5px solid var(--c)}
+.les header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}
+.les h3{margin:2px 0;font-size:16.5px}.les small{color:var(--mut)}
+.no{display:inline-block;background:linear-gradient(135deg,var(--c),var(--c2));color:#fff;border-radius:10px;padding:1px 10px;font-weight:700;font-size:13px}
+.all{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid var(--c);color:var(--c);background:transparent;border-radius:999px;padding:4px 12px;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14px;color:var(--tx);cursor:pointer;display:flex;align-items:center;gap:7px;padding:8px 13px;border-radius:14px;border:1px solid var(--bd);background:var(--chip);transition:.2s;text-align:start}
+.chip i{font-style:normal;font-size:17px;filter:grayscale(.6);transition:.2s}
+.chip:hover{transform:translateY(-2px)}
+.chip.on{background:linear-gradient(135deg,var(--c),var(--c2));color:#fff;border-color:transparent;box-shadow:0 8px 22px -8px var(--c)}
+.chip.on i{filter:none;transform:scale(1.2) rotate(-8deg)}
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.ty{padding:16px;text-align:center}
+.ty .ic{font-size:34px}.ty h4{margin:4px 0 10px;font-size:17px}
+.ty label{display:block;color:var(--mut);font-size:12.5px;margin-top:8px}
+.st{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:4px}
+.st button{width:36px;height:36px;border-radius:50%;border:0;font-size:20px;cursor:pointer;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4);box-shadow:0 4px 14px -4px #8b5cf6}
+.st output{min-width:34px;font-size:22px;font-weight:900}
+.opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.opts input,.opts select{font:inherit;padding:10px 12px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--tx);flex:1;min-width:150px}
+.go{display:block;width:100%;margin-top:16px;font:inherit;font-weight:900;font-size:19px;color:#fff;border:0;border-radius:18px;padding:15px;cursor:pointer;background:linear-gradient(110deg,#8b5cf6,#ec4899,#06b6d4,#8b5cf6);background-size:300% 100%;animation:sh 6s linear infinite;box-shadow:0 12px 34px -10px #a855f7}
+.go:disabled{opacity:.75;cursor:wait}
+@keyframes sh{to{background-position:-300% 0}}
+.bar{position:fixed;inset-inline:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:10px;align-items:center;background:var(--card);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--bd);z-index:5;font-size:14px;flex-wrap:wrap}
+.bar b{font-size:18px;background:linear-gradient(90deg,#8b5cf6,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bar button{font:inherit;cursor:pointer;border-radius:999px;padding:7px 16px;border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.bar .nx{background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;border:0}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tools button{font:inherit;cursor:pointer;border-radius:12px;padding:9px 14px;border:1px solid var(--bd);background:var(--card);color:var(--tx)}
+.gp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.gb{font:inherit;color:#fff;cursor:pointer;border:0;border-radius:28px;padding:20px 8px 16px;display:flex;flex-direction:column;align-items:center;gap:2px;background:linear-gradient(135deg,var(--c),var(--c2));box-shadow:0 14px 30px -12px var(--c);opacity:.78;transition:.3s;position:relative;overflow:hidden}
+.gb::after{content:"✨";position:absolute;top:8px;inset-inline-end:12px;opacity:.7}
+.gb b{font-size:54px;line-height:1.1;text-shadow:0 0 22px #fff9,0 4px 14px #0004}.gb span{font-weight:900;font-size:17px}.gb small{opacity:.9;font-size:12px}
+.gb:hover{opacity:1;transform:translateY(-4px) scale(1.03)}
+.gb.on{opacity:1;outline:4px solid #fff;outline-offset:-4px;box-shadow:0 0 0 3px var(--c),0 16px 40px -8px var(--c);animation:fl 3s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-5px)}}
+.cfg{padding:14px;margin-top:12px}.cfg .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}.cfg .row>*{flex:1;min-width:150px}.cfg label{font-size:13.5px;color:var(--mut)}.cfg input,.cfg select,.cfg textarea{font:inherit;padding:9px 11px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--tx);width:100%;margin-top:4px}.cfg summary{cursor:pointer;font-weight:700;font-size:16px}.pal{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}.pal button{min-width:34px;height:34px;border-radius:9px;border:1px solid var(--bd);background:var(--chip);color:var(--tx);cursor:pointer;font:inherit;font-size:15px;direction:ltr}.pal b{flex-basis:100%;font-size:12px;color:var(--mut)}.cfg .add{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:9px 18px;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4);margin:6px 6px 0 0}
+.qc{display:flex;gap:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer;align-items:flex-start;line-height:1.8}.qc.on{border-color:#8b5cf6;box-shadow:0 0 0 2px #8b5cf6aa}.qc input{margin-top:7px;width:20px;height:20px;flex:none}.qc .o{display:flex;gap:4px 14px;flex-wrap:wrap;font-size:13.5px;color:var(--mut)}.qc .ok{color:#10b981;font-weight:700}.qc .so{font-size:13px;color:#10b981}.sgh{margin:18px 0 8px;font-size:17px}
+#toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));inset-inline:14px;margin:auto;max-width:420px;text-align:center;background:#1e1646;color:#fff;padding:11px 16px;border-radius:14px;z-index:9;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 30px #0006}
+#toast.on{opacity:1}
+</style>
+<style id="ps">
+.paper{background:#fff;color:#111;border-radius:14px;padding:26px 28px;font-family:'Cairo',Tahoma,Arial,sans-serif;line-height:1.9;box-shadow:0 14px 40px -14px rgba(60,30,140,.5);border-top:6px solid #8b5cf6;direction:rtl}
+.paper h2{text-align:center;margin:0 0 4px;font-size:22px}
+.paper .meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border:1.5px solid #333;border-radius:8px;padding:6px 12px;margin:10px 0 14px;font-size:14px}
+.paper h4{margin:18px 0 6px;font-size:16.5px;background:#f1ecff;border-inline-start:5px solid #8b5cf6;padding:3px 10px;border-radius:6px}
+.paper h4 small{font-weight:400;color:#555}
+.paper ol{margin:0;padding-inline-start:26px}.paper li{margin-bottom:10px}.paper p{margin:0}
+.paper .op{display:grid;grid-template-columns:repeat(2,1fr);gap:0 14px}
+.paper .bx{float:left;font-weight:400;letter-spacing:2px}
+.paper .an{display:none;color:#047857;font-weight:700}
+.paper .sol{background:#ecfdf5;padding:4px 10px;border-radius:8px;margin-top:4px;font-weight:600}
+.paper .sp{height:160px;background:repeating-linear-gradient(transparent 0 31px,#c9c9c9 31px 32px);border-radius:6px}.paper{-webkit-print-color-adjust:exact;print-color-adjust:exact}.paper li{break-inside:avoid}.show .paper .an{display:block}.show .paper i.an{display:inline}
+.show .paper .ok{color:#047857;font-weight:900;text-decoration:underline}
+.paper .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:center;font-size:14px;line-height:1.5}.paper .lg{width:80px;height:80px;display:grid;place-items:center}.paper .lg img{max-width:100%;max-height:100%}.paper .c{flex:1}
+.paper input[type=radio]{margin-inline-end:4px}.paper textarea{width:100%;border:1px solid #bbb;border-radius:8px;padding:8px;font:inherit;margin-top:4px}.paper .fl{display:block;font-size:13px;color:#555;margin:4px 0}.paper li.g{background:#ecfdf5;border-radius:8px}.paper li.w{background:#fef2f2;border-radius:8px}.paper .sub{display:block;margin:18px auto 0;font:inherit;font-weight:700;border:0;border-radius:12px;padding:10px 26px;color:#fff;background:#7c3aed;cursor:pointer}.paper #res{text-align:center;margin-top:10px;font-weight:700}.paper .meta input{font:inherit;border:0;border-bottom:1px dotted #333;min-width:150px}
+sup{font-size:.7em;vertical-align:super;line-height:0}.rt{display:inline-flex;direction:rtl;align-items:stretch;unicode-bidi:isolate}.rt .rs{display:inline-block;transform:scaleX(-1);font-size:1.3em;line-height:1}.rt .rr{border-top:1.5px solid currentColor;padding:0 4px;margin-top:2px}.rt.l{direction:ltr}.rt.l .rs{transform:none}.ix{font-size:.6em;align-self:flex-start}.pvw{margin:6px 0;padding:6px 10px;border-radius:10px;background:#fff;color:#111;min-height:32px;font-size:16px}
+.mb{border:2px solid #7c3aed;border-radius:8px;padding:0 12px;font-size:15px;margin-inline-start:10px;white-space:nowrap}.mx{white-space:nowrap;unicode-bidi:isolate}.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 3px;line-height:1.3;font-size:.95em}.fr>span{padding:0 3px;text-align:center}.fr>span:first-child{border-bottom:2px solid currentColor}.paper .pt{list-style:none;padding-inline-start:8px;margin-top:4px}.paper+.paper{margin-top:20px;page-break-before:always;break-before:page}
+@page{size:A4;margin:12mm}
+@media print{.sub,textarea,.bar,#toast,.hero,.step,.tools,.tabs,#lessons,#aq,#bk,#tp,.types,.opts,.cfg,.go,#sg{display:none!important}html,body{background:#fff!important;padding:0!important;margin:0!important;min-height:0}:root{padding:0}.wrap{padding:0;max-width:none}.paper{box-shadow:none;border-radius:0;border-top:0;padding:0}.paper h4{background:#eee!important}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+ <div class="hero"><h1>✨ صانع الاختبارات السحري</h1><p id="sub">رياضيات الصف التاسع · الفصل الدراسي الأول 2026–2027 · الجزء الأول</p></div>
+ <div class="step"><b>🎓</b> اختر الصف</div>
+ <div class="gp" id="gp"></div>
+ <div class="step"><b>١</b> اختر البنود المطلوبة من دروس الكتاب</div>
+ <div class="tabs" id="tabs"></div>
+ <div id="lessons"></div>
+
+<div class="card cfg" id="tp"><label>مواضيع أو دروس إضافية (اختياري، تُدمج مع البنود المحددة)<textarea id="tx" rows="2"></textarea></label></div>
+ <div class="step"><b>٢</b> أنواع الأسئلة وأعدادها</div>
+ <div class="types" id="types"></div>
+ <details class="card cfg" id="aq"><summary>➕ أضف سؤالًا من عندك (مع لوحة الرموز)</summary>
+ <div class="row"><label>نوع السؤال<select id="qt" onchange="qf()"><option value="es">مقالي</option><option value="mcq">اختيار من متعدد</option><option value="tf">صح وخطأ</option></select></label></div>
+ <textarea id="qq" rows="2" oninput="pv()" placeholder="نص السؤال. ضع العبارات الرياضية بين $ مثل $٣/٤ + ٢$ — للأس س^٢ وللجذر √(٢٥) — وللمقالي متعدد الطلبات: كل طلب في سطر"></textarea><div class="pvw" id="pv"></div>
+ <div id="qm" hidden><div class="row"><input class="qo" placeholder="الخيار أ"><input class="qo" placeholder="الخيار ب"><input class="qo" placeholder="الخيار ج"><input class="qo" placeholder="الخيار د"></div><select id="qa"><option value="0">الإجابة الصحيحة: أ</option><option value="1">ب</option><option value="2">ج</option><option value="3">د</option></select></div>
+ <select id="qtf" hidden><option value="1">الإجابة: صح</option><option value="0">الإجابة: خطأ</option></select>
+ <textarea id="qs" rows="1" placeholder="الحل النموذجي (اختياري، لكل طلب في سطر)"></textarea>
+ <div class="pal" id="pal"></div>
+ <button class="add" onclick="addq()">إضافة السؤال</button><button class="add" onclick="C.mcq=[];C.tf=[];C.es=[];$('#qn').textContent='تم مسح أسئلتك'">مسح أسئلتي</button> <small id="qn"></small>
+</details>
+<div class="opts">
+  <input id="ttl" oninput="tdirty=1" value="اختبار قصير – رياضيات التاسع" aria-label="عنوان الاختبار">
+  <select id="lvl" aria-label="المستوى"><option>متدرج (من السهل إلى الصعب)</option><option>سهل</option><option>متوسط</option><option>صعب (تفكير عليا)</option></select>
+ </div>
+ <div class="step"><b>٣</b> نمط الاختبار والترويسة</div>
+<div class="card cfg" oninput="sv()">
+ <div class="row"><label>نمط الاختبار<select id="md" onchange="if(R)paper()"><option value="p">ورقي (للطباعة)</option><option value="e">إلكتروني</option></select></label>
+ <label>الأرقام<select id="dg" onchange="if(R)paper()"><option value="c">حسب السياق</option><option value="h">هندية ١٢٣</option><option value="n">إنجليزية 123</option></select></label>
+ <label>لغة الاختبار<select id="ln" onchange="if(R)paper()"><option value="ar">العربية</option><option value="en">English</option></select></label><label>رموز المتغيرات<select id="sy"><option value="a">عربية (س، ص، جا)</option><option value="e">إنجليزية (x, y, sin)</option></select></label><label>عدد النماذج<select id="nm" onchange="if(R)paper()"><option value="1">نموذج واحد</option><option value="2">نموذجان (أ) و(ب)</option></select></label><label>مساحة حل المقالي<select id="sp"><option value="110">صغيرة</option><option value="180" selected>متوسطة</option><option value="280">كبيرة</option><option value="400">كبيرة جدًا</option></select></label></div>
+ <div class="row"><label>اسم المدرسة<input id="sch" placeholder="اسم المدرسة"></label><label>الصف<select id="gr" onchange="gsel()"></select></label><label>المادة<select id="sb" onchange="$('#sbo').hidden=this.value!='أخرى'"><option>رياضيات</option><option>علوم</option><option>فيزياء</option><option>كيمياء</option><option>أحياء</option><option>اللغة العربية</option><option>اللغة الإنجليزية</option><option>التربية الإسلامية</option><option>الدراسات الاجتماعية</option><option>الحاسوب</option><option>أخرى</option></select><input id="sbo" hidden placeholder="اسم المادة"></label><label>الفترة الدراسية<select id="tm"><option value="1">الفترة الدراسية الأولى</option><option value="2">الفترة الدراسية الثانية</option></select></label></div>
+ <div class="row"><label>شعار وزارة التربية<input type="file" accept="image/*" onchange="up(this,'L1')"></label><label>شعار المدرسة<input type="file" accept="image/*" onchange="up(this,'L2')"></label></div>
+</div>
+<button class="go" id="go" onclick="gen()">🔎 اقترح الأسئلة</button>
+ <div id="sg"></div>
+ <div id="out"></div>
+</div>
+<div class="bar"><span>البنود المحددة: <b id="cnt">٠</b></span><span>الدرجة الكلية: <b id="tot">٠</b></span><button onclick="clr()">مسح</button><button class="nx" onclick="document.getElementById('types').scrollIntoView()">التالي ⟵</button></div>
+<div id="toast"></div>
+<script>
+const EN=()=>$("#ln").value=="en",SB=()=>$("#sb").value=="أخرى"?($("#sbo").value||"المادة"):$("#sb").value;
+const $=s=>document.querySelector(s),ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const IC=["✨","🧩","🔮","🌟","🎯"];
+let D=[
+["الوحدة الأولى","الأعداد الحقيقية والعمليات عليها","#8b5cf6","#6366f1","🔢",[
+["الجذور التربيعية والأعداد غير النسبية",20,"الجذر التربيعي والجذر الأساسي|الأعداد النسبية وغير النسبية|تقدير الجذور التربيعية|خواص الجذور التربيعية"],
+["الأعداد الحقيقية (مقارنة – ترتيب)",24,"مجموعة الأعداد الحقيقية ومخطط ڤن|تمثيل الأعداد على خط الأعداد|مقارنة الأعداد الحقيقية وترتيبها|الفترات المحدودة وغير المحدودة"],
+["العمليات على الأعداد الحقيقية",32,"ترتيب العمليات الحسابية|خواص العمليات|العمليات على الجذور|مسائل حياتية"],
+["القيمة المطلقة",36,"مفهوم القيمة المطلقة|تبسيط عبارات القيمة المطلقة|حل معادلات تتضمن قيمة مطلقة"],
+["حل متباينة من الدرجة الأولى في متغيّر واحد",43,"حل المتباينة وتمثيلها على خط الأعداد|المتباينات المركبة|متباينات تتضمن قيمة مطلقة|مسائل لفظية على المتباينات"],
+["الصورة العلمية باستخدام الأسس الصحيحة",51,"الأسس الصحيحة الموجبة والسالبة|كتابة العدد بالصورة العلمية|العمليات على الصورة العلمية"]]],
+["الوحدة الثانية","التحليل والمعادلات","#06b6d4","#3b82f6","🧮",[
+["تحليل الفرق بين مكعّبَين أو مجموعهما",70,"تحليل الفرق بين مكعبين|تحليل مجموع مكعبين|العامل المشترك قبل التحليل"],
+["تحليل الحدودية الثلاثية س² + ب س + جـ",75,"التحليل ببطاقات الجبر|جـ موجبة|جـ سالبة"],
+["تحليل الحدودية الثلاثية أ س² + ب س + جـ",81,"التحليل ببطاقات الجبر|طريقة التجربة|طريقة التجميع (أ × جـ)"],
+["تحليل المربّع الكامل",86,"التعرف على المربع الكامل|تحليل مربع المجموع والفرق|إكمال المربع"],
+["تحليل الحدودية الرباعية",94,"التحليل بالتجميع|إعادة الترتيب ثم التجميع|التحليل بأكثر من طريقة"],
+["حل معادلة من الدرجة الثانية في متغيّر واحد",98,"الحل بالتحليل وخاصية الضرب الصفري|الحل بالجذر التربيعي|مسائل حياتية على المعادلات"]]],
+["الوحدة الثالثة","الحدوديات النسبية – الهندسة الإحداثية","#ec4899","#a855f7","📐",[
+["الحدوديات النسبية وتبسيطها",120,"مفهوم الحدودية النسبية وقيم المتغير الممنوعة|التبسيط بالتحليل والاختصار"],
+["ضرب الحدوديات النسبية",124,"ضرب الحدوديات النسبية|التحليل والتبسيط قبل الضرب"],
+["قسمة الحدوديات النسبية",128,"القسمة باستخدام المقلوب|القسمة مع التحليل والتبسيط"],
+["جمع الحدوديات النسبية وطرحها",132,"الجمع والطرح بمقامات متحدة|الجمع والطرح بمقامات مختلفة (م.م.أ)"],
+["المسافة بين نقطتَين في المستوى الإحداثي",141,"قانون المسافة|أطوال الأضلاع والمحيط|تحديد نوع المثلث"],
+["إحداثيا نقطة منتصف قطعة مستقيمة",149,"قانون نقطة المنتصف|إيجاد أحد طرفي القطعة|تطبيقات هندسية"]]],
+["الوحدة الرابعة","هندسة التحويلات – الإحصاء والاحتمال","#f59e0b","#ef4444","📊",[
+["الدوران في المستوى",166,"الدوران حول نقطة الأصل|اتجاه الدوران وقياس الزاوية|إيجاد صورة شكل بالدوران"],
+["التكبير",177,"معامل التكبير|التكبير والتصغير|النسبة بين المحيطين والمساحتين"],
+["المدرّج التكراري",187,"الجداول التكرارية والفئات|رسم المدرج التكراري|قراءة المدرج وتحليله"],
+["المضلّع التكراري",191,"مراكز الفئات|رسم المضلع التكراري|قراءة المضلع وتحليله"],
+["مخطّط الصندوق ذي العارضتَين",198,"الوسيط والربيعان|رسم مخطط الصندوق|المدى الربيعي وقراءة المخطط"],
+["الترجيح والعدالة – الاحتمال",204,"الترجيح|العدالة في الألعاب|الاحتمال التجريبي والنظري"]]]];
+const D0=D;
+const T={mcq:{n:"اختيار من متعدد",i:"🔘",c:5,m:1},tf:{n:"صح وخطأ",i:"⚖️",c:5,m:1},es:{n:"مقالي",i:"✍️",c:3,m:3}};
+let cur=0,R=null;const sel=new Set();
+function tabs(){$("#tabs").innerHTML=D.map((u,i)=>`<button class="tab${i==cur?" on":""}" style="--c:${u[2]};--c2:${u[3]}" onclick="cur=${i};tabs();lessons()"><b>${u[4]}</b><span>${u[0]}</span><small>${u[1]}</small></button>`).join("")}
+function lessons(){if(!D.length){$("#lessons").innerHTML='<div class="card cfg">لا يوجد كتاب مدمج لهذا الصف بعد — اكتب المواضيع المطلوبة في الخانة تحت الدروس.</div>';return bar()}const u=D[cur];$("#lessons").innerHTML=u[5].map((l,j)=>{const its=l[2].split("|"),all=its.every((_,k)=>sel.has(`${cur}.${j}.${k}`));return `<section class="card les" style="--c:${u[2]};--c2:${u[3]}"><header><div><span class="no">${ar(cur+1)}-${ar(j+1)}</span><h3>${l[0]}</h3>${l[1]?`<small>صفحة ${ar(l[1])}</small>`:""}</div><button class="all" onclick="allL(${j})">${all?"إلغاء الكل":"تحديد الكل"}</button></header><div class="chips">${its.map((t,k)=>`<button class="chip${sel.has(`${cur}.${j}.${k}`)?" on":""}" onclick="tg(this,'${cur}.${j}.${k}')"><i>${IC[k%5]}</i>${t}</button>`).join("")}</div></section>`}).join("");bar()}
+function tg(el,k){sel.has(k)?sel.delete(k):sel.add(k);el.classList.toggle("on");bar()}
+function allL(j){const n=D[cur][5][j][2].split("|").length,ks=[...Array(n).keys()].map(k=>`${cur}.${j}.${k}`),all=ks.every(k=>sel.has(k));ks.forEach(k=>all?sel.delete(k):sel.add(k));lessons()}
+function clr(){sel.clear();lessons()}
+function bar(){$("#cnt").textContent=ar(sel.size);$("#tot").textContent=ar(Object.values(T).reduce((s,t)=>s+t.c*t.m,0))}
+function types(){$("#types").innerHTML=Object.entries(T).map(([k,t])=>`<div class="card ty"><div class="ic">${t.i}</div><h4>${t.n}</h4><label>عدد الأسئلة</label><div class="st"><button onclick="ch('${k}','c',-1)">−</button><output>${ar(t.c)}</output><button onclick="ch('${k}','c',1)">+</button></div><label>درجة كل سؤال</label><div class="st"><button onclick="ch('${k}','m',-1)">−</button><output>${ar(t.m)}</output><button onclick="ch('${k}','m',1)">+</button></div></div>`).join("");bar()}
+function ch(k,f,d){const t=T[k];t[f]=Math.max(f=="c"?0:1,Math.min(20,t[f]+d));types()}
+let tm;function toast(m){const e=$("#toast");e.textContent=m;e.classList.add("on");clearTimeout(tm);tm=setTimeout(()=>e.classList.remove("on"),3800)}
+const C={mcq:[],tf:[],es:[]},L={L1:"",L2:""};let lastF=null;
+const fx=s=>{const m=EN()?"n":$("#dg").value;s=String(s==null?"":s);return m=="n"?s.replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)):m=="h"?s.replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]):s};
+const POOL={mcq:[],tf:[],es:[]},K=n=>n?Math.min(n+Math.max(3,Math.ceil(n*.8)),25):0;
+async function gen(add){
+ const n=T.mcq.c+T.tf.c+T.es.c,cu=C.mcq.length+C.tf.length+C.es.length;
+ if(!n&&!cu)return toast("حدّد عدد الأسئلة أو أضف سؤالًا");
+ if(!n){R=1;return paper()}
+ if(!sel.size&&!$("#tx").value.trim())return toast("اختر بندًا من الدروس أو اكتب المواضيع المطلوبة ☝️");
+ let S=null;try{S=window.claude&&await claude.use("sample")}catch(e){}
+ if(!S)return toast("توليد الأسئلة يعمل عند فتح الصفحة من حسابك في Claude");
+ const items=[...sel].map(k=>{const[u,l,i]=k.split("."),Q=D[u][5][l];return `- ${D[u][0]}، درس ${ar(+u+1)}-${ar(+l+1)} (${Q[0]}): ${Q[2].split("|")[i]}`}).join("\n");
+ const dg={c:"الأرقام هندية (٠١٢٣) داخل النص العربي وإنجليزية (0123) داخل العبارات اللاتينية",h:"الأرقام هندية (٠١٢٣) دائمًا",n:"الأرقام إنجليزية (0123) دائمًا"}[$("#dg").value],sy=$("#sy").value=="a"&&!EN()?"المتغيرات والرموز بالعربية (س، ص، ع، أ، ب، جـ، جا، جتا، ظا)":"المتغيرات والرموز بالإنجليزية (x, y, a, b, sin, cos, tan)";
+ const b=$("#go");b.disabled=true;b.textContent="🔮 تُحضَّر الأسئلة…";
+ try{
+  const r=await S.json(`أنت معلم ${SB()} كويتي خبير. اقترح أسئلة اختبار لطلاب الصف ${$("#gr").value} (مادة ${SB()}، منهج وزارة التربية في دولة الكويت) تغطي ما يلي فقط:\n${items}\n${$("#tx").value}\n\nالمطلوب بالضبط: ${K(T.mcq.c)} سؤال اختيار من متعدد (4 خيارات)، ${K(T.tf.c)} سؤال صح وخطأ، ${K(T.es.c)} سؤال مقالي (سيختار المعلم منها). المستوى: ${$("#lvl").value}. نوّع الأسئلة وتجنب التكرار ${add?"وأسئلة مختلفة عمّا اقترحته سابقًا: "+[...POOL.mcq,...POOL.tf,...POOL.es].slice(0,40).map(x=>String(x.q).slice(0,40)).join(" | "):""}. وزّع الأسئلة على البنود بالتساوي، وتأكد من صحة كل إجابة رياضيًا ومناسبتها لمستوى الكتاب. بلا LaTeX؛ الأس بعلامة ^ مثل س^٢ أو (س+١)^٣، والجذر دائمًا بقوسين مثل √(٢٥) أو √(س+١)، والتكعيبي ∛(٨). اكتب كل عبارة أو معادلة رياضية كاملة على سطر واحد بين علامتي $ مثل $٣ × ٤ = ١٢$، وكل كسر داخلها بصيغة أ/ب مثل $٣/٤$، ولا تفصل العبارة الرياضية على سطرين. وكل كسر اكتبه دائمًا بصيغة بسط/مقام داخل $…$ حتى لو ورد داخل جملة. وفي المجموعات استخدم الأقواس { } ولا تستخدم / ولا أي خطوط داخلها، واكتب شرط المجموعة بعد الرمز | مثل {س | س عدد زوجي}. إذا كان للسؤال المقالي أكثر من طلب فضع نصه العام في q والطلبات المنفصلة في المصفوفة p (كل طلب جملة كاملة) والحل لكل طلب في المصفوفة a بالترتيب نفسه؛ وإلا فاجعل p مصفوفة فارغة وa نصًا مختصرًا. ${dg}. ${sy}. ${EN()?"اكتب الأسئلة كاملة بالإنجليزية بحروف وأرقام لاتينية.":"اكتب الأسئلة بالعربية."} أعد JSON فقط: {"mcq":[{"q":"","o":["","","",""],"a":0}],"tf":[{"q":"","a":true}],"es":[{"q":"","p":[],"a":""}]} حيث a في mcq فهرس الإجابة الصحيحة (0-3). اجعل المصفوفة فارغة إذا كان عددها صفرًا.`,{modelTier:"default",cache:false});
+  if(!add){POOL.mcq=[];POOL.tf=[];POOL.es=[]}
+  [["mcq",r.mcq],["tf",r.tf],["es",r.es]].forEach(([k,a])=>(Array.isArray(a)?a:[]).filter(x=>x&&x.q&&(k!="mcq"||Array.isArray(x.o))).forEach((x,i)=>{x.on=!add&&i<T[k].c;POOL[k].push(x)}));
+  sug();
+ }catch(e){toast(e&&e.code=="not_granted"?"لم يتم السماح بتوليد الأسئلة":"تعذّر التوليد، حاول مرة أخرى")}
+ b.disabled=false;b.textContent="🔎 اقترح الأسئلة"}
+const TT={mcq:["اختيار من متعدد","🔘"],tf:["صح وخطأ","⚖️"],es:["مقالي","✍️"]};
+function qv(x,k){const LT=EN()?"abcd":"أبجد",P=Array.isArray(x.p)&&x.p.length?x.p:null,A=Array.isArray(x.a)?x.a:[x.a];
+ if(k=="mcq")return `<div>${mt(x.q)}</div><div class="o">${(x.o||[]).map((y,j)=>`<span class="${j==x.a?"ok":""}">${LT[j]}) ${mt(y)}${j==x.a?" ✓":""}</span>`).join("")}</div>`;
+ if(k=="tf")return `<div>${mt(x.q)}</div><div class="so">${(x.a===true||x.a=="true")?"✓ صح":"✗ خطأ"}</div>`;
+ return `<div>${mt(x.q)}</div>${P?P.map((y,j)=>`<div class="o">${j+1}) ${mt(y)}</div>`).join(""):""}<div class="so">الحل: ${mt(A.join(" ؛ "))}</div>`}
+function sug(){let h=`<div class="step"><b>٤</b> اختر الأسئلة المناسبة من المقترحات</div>`;
+ for(const k of["mcq","tf","es"]){const L=POOL[k];if(!L.length)continue;h+=`<h4 class="sgh">${TT[k][1]} ${TT[k][0]} <small id="n${k}"></small></h4>`+L.map((x,i)=>`<label class="card qc${x.on?" on":""}"><input type="checkbox" ${x.on?"checked":""} onchange="tq('${k}',${i},this)"><div>${qv(x,k)}</div></label>`).join("")}
+ const cu=C.mcq.length+C.tf.length+C.es.length;
+ h+=`${cu?`<p class="so">＋ أسئلتك الخاصة (${ar(cu)}) ستُضاف تلقائيًا للاختبار</p>`:""}<div class="tools"><button onclick="gen(1)">➕ اقترح المزيد</button></div><button class="go" onclick="R=1;paper()">🪄 جهّز الاختبار من المختار</button>`;
+ $("#sg").innerHTML=h;cn();$("#sg").scrollIntoView({behavior:"smooth"})}
+function tq(k,i,e){POOL[k][i].on=e.checked;e.parentNode.classList.toggle("on",e.checked);cn()}
+function cn(){for(const k of["mcq","tf","es"]){const e=$("#n"+k);if(e){const n=POOL[k].filter(x=>x.on).length;e.textContent=`(المختار ${ar(n)} من ${ar(T[k].c)} المطلوب)`;e.style.color=n==T[k].c?"#10b981":"#f59e0b"}}}
+const XT=en=>en?{O:["Part 1","Part 2","Part 3"],L:"abcd",PL:"abcdefgh".split(""),tf:["True","False"],hm:"Choose the correct answer",ht:"Choose (a) if the statement is true and (b) if it is false",he:"Answer the following questions",mk:"marks",g:"Grade",sj:"Subject",nm:"Name",dt:"Date",sc:"Score",st:"Student name",pl:"Write your answer here",up:"📎 Or upload a photo/file of your solution",sub:"✅ Submit",hd:"State of Kuwait – Ministry of Education",tm:["First term","Second term"]}:{O:["أولاً","ثانياً","ثالثاً"],L:"أبجد",PL:["أ","ب","ج","د","هـ","و","ز","ح"],tf:["صح","خطأ"],hm:"اختر الإجابة الصحيحة",ht:"اختر (أ) إذا كانت العبارة صحيحة و(ب) إذا كانت خاطئة",he:"أجب عن الأسئلة الآتية",mk:"درجة",g:"الصف",sj:"المادة",nm:"الاسم",dt:"التاريخ",sc:"الدرجة",st:"اسم الطالب",pl:"اكتب إجابتك هنا",up:"📎 أو ارفع صورة/ملف الحل",sub:"✅ تسليم الإجابات",hd:"دولة الكويت – وزارة التربية",tm:["الفترة الدراسية الأولى","الفترة الدراسية الثانية"]};
+function sheet(M,F,Z,tag,E){
+ const en=EN(),X=XT(en),t=mt;let o=0,h="";
+ const hd=(x,k,n)=>`<h4>${X.O[o++]}: ${x} <small>(${fx(ar(n))} × ${fx(ar(T[k].m))} = ${fx(ar(n*T[k].m))} ${X.mk})</small></h4>`;
+ const TA=`<textarea rows="4" placeholder="${X.pl}"></textarea><label class="fl">${X.up} <input type="file" accept="image/*,.pdf,.doc,.docx" onchange="this.closest('label').nextElementSibling.textContent='✔ '+this.files[0].name"></label><small></small>`;
+ const F2=F.map(x=>({q:x.q,o:X.tf,a:(x.a===true||x.a=="true")?0:1}));
+ const mc=(A,k)=>`<ol>${A.map((x,i)=>`<li data-k="${k}" data-a="${x.a}"><p>${t(x.q)}</p><div class="op">${(x.o||[]).map((y,j)=>{const lb=X.L[j]+") "+t(y);return E?`<label class="${j==x.a?"ok":""}"><input type="radio" name="${k}${i}" value="${j}">${lb}</label>`:`<span class="${j==x.a?"ok":""}">${lb}</span>`}).join("")}</div></li>`).join("")}</ol>`;
+ if(M.length)h+=hd(X.hm,"mcq",M.length)+mc(M,"m");
+ if(F2.length)h+=hd(X.ht,"tf",F2.length)+mc(F2,"t");
+ const sp=v=>`<div class="sp" style="height:${v}px"></div>`;
+ if(Z.length)h+=hd(X.he,"es",Z.length)+`<ol>${Z.map(x=>{const P=Array.isArray(x.p)&&x.p.length?x.p:null,A=Array.isArray(x.a)?x.a:[x.a];return `<li><p>${t(x.q)}</p>${P?`<ol class="pt">${P.map((y,j)=>`<li><p>${X.PL[j]}) ${t(y)}</p><div class="an sol">${t(A[j]||"")}</div>${E?TA:sp(Math.round($("#sp").value*.8))}</li>`).join("")}</ol>`:`<div class="an sol">${t(A.join(" ؛ "))}</div>${E?TA:sp($("#sp").value)}`}</li>`}).join("")}</ol>`;
+ const tot=M.length*T.mcq.m+F.length*T.tf.m+Z.length*T.es.m,lg=k=>L[k]?`<img src="${L[k]}" alt="">`:"",go=$("#gr").selectedOptions[0];
+ return `<div class="paper" dir="${en?"ltr":"rtl"}"><div class="hd"><div class="lg">${lg("L1")}</div><div class="c">${X.hd}<br><b>${esc($("#sch").value)}</b></div><div class="lg">${lg("L2")}</div></div><h2>${esc($("#ttl").value)}${tag?`<span class="mb">${tag}</span>`:""}</h2><div class="meta"><span>${X.sj}: ${esc(SB())}</span><span>${X.g}: ${esc(en?go.dataset.e:go.value)}</span><span>${X.tm[+$("#tm").value-1]}</span><span>${X.nm}: ${E?`<input placeholder="${X.st}">`:"......................................"}</span>${E?"":`<span>${X.dt}: ................</span>`}<span>${X.sc}: ${E?"":"...... "}/ ${fx(ar(tot))}</span></div>${h}${E?`<button class="sub" onclick="subm()">${X.sub}</button><div id="res"></div>`:""}</div>`}
+function paper(){
+ const en=EN(),E=$("#md").value=="e",ch=k=>[...C[k],...POOL[k].filter(x=>x.on)],M=ch("mcq"),F=ch("tf"),Z=ch("es");
+ if(!M.length&&!F.length&&!Z.length)return toast("اختر سؤالًا واحدًا على الأقل");
+ R=1;const two=$("#nm").value=="2"&&!E;
+ const sh=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
+ const mB=A=>sh(A).map(x=>{const p=sh([0,1,2,3].slice(0,(x.o||[]).length));return{...x,o:p.map(i=>x.o[i]),a:p.indexOf(+x.a)}});
+ let h=sheet(M,F,Z,two?(en?"Model A":"نموذج (أ)"):"",E);
+ if(two)h+=sheet(mB(M),sh(F),sh(Z),en?"Model B":"نموذج (ب)",E);
+ $("#out").innerHTML=`<div class="step"><b>٥</b> اختبارك جاهز 🎉</div><div class="tools"><button onclick="$('#paper').classList.toggle('show')">👁️ إظهار/إخفاء الإجابات</button><button onclick="pr(0)">🖨️ طباعة (للطلاب)</button><button onclick="pr(1)">🖨️ طباعة مع الإجابات</button>${E?"":`<button onclick="pdf(0)">📄 حفظ PDF (للطلاب)</button><button onclick="pdf(1)">📄 حفظ PDF مع الإجابات</button><button onclick="dl(0)">⬇️ ملف للطباعة</button><button onclick="dl(1)">⬇️ ملف مع الإجابات</button>`}<button onclick="$('#sg').scrollIntoView({behavior:'smooth'})">↩️ تعديل الاختيار</button></div><div id="paper">${h}</div>`;
+ $("#out").scrollIntoView({behavior:"smooth"})}
+function subm(){let s=0,t=0;document.querySelectorAll("#paper li[data-k]").forEach(li=>{const w=li.dataset.k=="m"?T.mcq.m:T.tf.m,c=li.querySelector("input:checked"),ok=c&&c.value==li.dataset.a;t+=w;if(ok)s+=w;li.classList.remove("g","w");li.classList.add(ok?"g":"w")});const z=document.querySelectorAll("#paper textarea").length;$("#res").innerHTML=`${EN()?"Objective score":"نتيجة الأسئلة الموضوعية"}: <b>${fx(ar(s))} / ${fx(ar(t))}</b>${z?`<br>الأسئلة المقالية (${fx(ar(z))}) يصحّحها المعلّم`:""}`;$("#res").scrollIntoView({behavior:"smooth"})}
+function qf(){const k=$("#qt").value;$("#qm").hidden=k!="mcq";$("#qtf").hidden=k!="tf";$("#qs").hidden=k!="es"}
+function addq(){const k=$("#qt").value,q=$("#qq").value.trim();if(!q)return toast("اكتب نص السؤال");const x={q};
+ if(k=="mcq"){x.o=[...document.querySelectorAll(".qo")].map(i=>i.value.trim());if(x.o.some(v=>!v))return toast("أكمل الخيارات الأربعة");x.a=+$("#qa").value}else if(k=="tf")x.a=$("#qtf").value=="1";else{const Q=q.split("\n").map(v=>v.trim()).filter(Boolean),A=$("#qs").value.split("\n").map(v=>v.trim()).filter(Boolean);x.q=Q[0];x.p=Q.slice(1);x.a=x.p.length?A:A.join(" ")}
+ C[k].push(x);document.querySelectorAll("#aq textarea,#aq .qo").forEach(i=>i.value="");$("#qn").textContent="أُضيف ✓ — عدد أسئلتك: "+ar(C.mcq.length+C.tf.length+C.es.length)}
+const P=[["رموز رياضية","√( ∛( ^ $ / ² ³ ⁿ ½ ± × ÷ = ≠ ≤ ≥ ≈ π ∞ ∈ ∉ ∪ ∩ ⊂ ° ∠ △ ⟂ ∥ → ⇒ ∑ | ( ) [ ] { } ′ − ·"],["عربي","س ص ع ك ل م ن أ ب جـ د هـ جا جتا ظا لو"],["English","x y z a b c d n m k sin cos tan log"]];
+function pal(){$("#pal").innerHTML=P.map(g=>`<b>${g[0]}</b>`+g[1].split(" ").map(c=>`<button type="button" onmousedown="event.preventDefault()" onclick="ins('${c}')">${c}</button>`).join("")).join("")}
+function ins(c){const f=lastF||$("#qq"),a=f.selectionStart==null?f.value.length:f.selectionStart,b=f.selectionEnd==null?a:f.selectionEnd;f.value=f.value.slice(0,a)+c+f.value.slice(b);f.focus();f.selectionStart=f.selectionEnd=a+c.length;pv()}
+document.addEventListener("focusin",e=>{const x=e.target;if(x.closest&&x.closest("#aq")&&/TEXTAREA|INPUT/.test(x.tagName))lastF=x});
+function sv(){try{localStorage.hx=JSON.stringify({s:$("#sch").value,g:$("#gr").value,L})}catch(e){}}
+function up(i,k){const f=i.files[0];if(!f)return;if(f.size>1.5e6)return toast("الصورة كبيرة، الحد ١٫٥ ميغابايت");const r=new FileReader();r.onload=()=>{L[k]=r.result;sv();toast("✔ تم رفع الشعار")};r.readAsDataURL(f)}
+function pv(){$("#pv").innerHTML=mt($("#qq").value)}
+function mt(s){const e=$("#sy").value=="e"||EN();
+ s=String(s==null?"":s).replace(/²/g,"^2").replace(/³/g,"^3").replace(/ⁿ/g,"^n");
+ s=esc(fx(s)).replace(/\^(\{[^}]*\}|\([^()]*\)|[-+−]?[\w٠-٩]+)/g,(m,g)=>`<sup>${g.replace(/^[({]|[)}]$/g,"")}</sup>`);
+ const O="(\\([^()]*\\)|√?[\\w٠-٩.\\u0600-\\u06FF]+(?:<sup>[^<]*<\\/sup>)?)",FR=new RegExp(O+"\\/"+O,"g"),u=v=>v.replace(/^\(|\)$/g,"");
+ const fr=(q,a,b)=>`<span class="fr"><span>${u(a)}</span><span>${u(b)}</span></span>`;
+ s=s.replace(/\$([^$]+)\$/g,(m,g)=>`<span class="mx" dir="ltr">${g.includes("{")?g:g.replace(FR,fr)}</span>`);
+ s=s.split(/(\{[^}]*\})/).map((x,i)=>i%2?x:x.replace(/(^|[^\w٠-٩\/.<>])([٠-٩0-9]{1,3})\/([٠-٩0-9]{1,3})(?![\w٠-٩\/])/g,(q,p,a,b)=>p+fr(0,a,b))).join("");
+ const W=/^[\w٠-٩.\u0600-\u06FF]+(<sup>[^<]*<\/sup>)?/;
+ const go=x=>{let o="",i=0;while(i<x.length){const c=x[i];if(c=="√"||c=="∛"){let j=i+1,g="";if(x[j]=="("){let d=1,k=j+1;while(k<x.length&&d){d+=x[k]=="("?1:x[k]==")"?-1:0;k++}g=x.slice(j+1,k-1);j=k}else{const m=W.exec(x.slice(j));if(m){g=m[0];j+=g.length}}o+=`<span class="rt${e?" l":""}">${c=="∛"?`<sup class="ix">${fx("3")}</sup>`:""}<span class="rs">√</span><span class="rr">${go(g)}</span></span>`;i=j}else{o+=c;i++}}return o};
+ return go(s)}
+function doc(a){const p=$("#paper").cloneNode(true),en=EN();p.classList.toggle("show",!!a);p.querySelectorAll(".sub,#res").forEach(x=>x.remove());
+ return `<!doctype html><html lang="${en?"en":"ar"}" dir="${en?"ltr":"rtl"}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc($("#ttl").value)}</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#eee;font-family:Cairo,Tahoma,Arial,sans-serif}${$("#ps").textContent}.paper{box-shadow:none;border-radius:0;border-top:0;max-width:210mm;margin:0 auto;background:#fff}.npr{display:block;margin:12px auto;font:inherit;font-weight:700;padding:9px 22px;border:0;border-radius:10px;background:#7c3aed;color:#fff;cursor:pointer}@media print{.npr{display:none}body{background:#fff}}</style><button class="npr" onclick="print()">🖨️ ${en?"Print":"طباعة"}</button>${p.outerHTML}</html>`}
+function pr(a){const f=document.createElement("iframe");f.style.cssText="position:fixed;left:-10000px;top:0;width:794px;height:1123px;border:0";f.srcdoc=doc(a);
+ f.onload=()=>{const go=()=>{try{f.contentWindow.focus();f.contentWindow.print()}catch(e){toast("الطباعة غير متاحة هنا، استخدم «ملف للطباعة» أو حفظ PDF")}},d=f.contentDocument;Promise.race([d&&d.fonts?d.fonts.ready:0,new Promise(r=>setTimeout(r,1800))]).then(()=>setTimeout(go,250))};document.body.appendChild(f);setTimeout(()=>f.remove(),180000)}
+async function dl(a){let d=null;try{d=await claude.use("downloads")}catch(e){}if(!d)return toast("التنزيل غير متاح هنا، استخدم حفظ PDF");try{await d.save({filename:a?"اختبار-مع-الإجابات.html":"اختبار-للطباعة.html",data:doc(a)})}catch(e){toast("لم يتم الحفظ")}}
+const PC=[["#8b5cf6","#6366f1","🔢"],["#06b6d4","#3b82f6","🧮"],["#ec4899","#a855f7","📐"],["#f59e0b","#ef4444","📊"],["#10b981","#06b6d4","🧪"],["#f43f5e","#f59e0b","🌟"]],SUB0=$("#sub").textContent;
+const U4=(a,b)=>a.map((u,k)=>{const c=PC[k%6];return["الوحدة "+["الأولى","الثانية","الثالثة","الرابعة"][k],u[0],c[0],c[1],u[1],u[2]]});
+const BOOKS={9:D0,
+6:U4([["الأعداد الكلية والأعداد العشرية والعمليات عليها","🔢",[
+["قراءة الأعداد الكلية وكتابتها",20,"القيمة المكانية للأرقام|الصيغة القياسية والتحليلية|قراءة الأعداد وكتابتها بالكلمات"],
+["قراءة الأعداد العشرية والكسور العشرية وكتابتها",25,"القيمة المكانية في العدد العشري|قراءة الكسر العشري وكتابته|الصيغة الممتدة للعدد العشري"],
+["مقارنة وترتيب الأعداد الكلية والعشرية",29,"مقارنة الأعداد الكلية|مقارنة الأعداد العشرية|الترتيب تصاعديًا وتنازليًا"],
+["تقريب الأعداد الكلية والعشرية",33,"التقريب إلى أقرب منزلة|تقريب الأعداد العشرية|مسائل حياتية على التقريب"],
+["جمع الأعداد الكلية والعشرية وطرحها",36,"الجمع|الطرح|مسائل لفظية"],
+["حساب ذهني: خصائص عملية الضرب",40,"الخاصيتان الإبدالية والتجميعية|خاصية التوزيع|الحساب الذهني بالخصائص"],
+["ضرب الأعداد الكلية والعشرية وتقدير الناتج",45,"ضرب الأعداد الكلية|ضرب الأعداد العشرية|تقدير ناتج الضرب"],
+["قسمة الأعداد على عدد مكوّن من رقمين",54,"القسمة المطوّلة|قسمة عدد عشري على عدد كلي|مسائل لفظية"],
+["قسمة عدد عشري على عدد عشري",59,"نقل الفاصلة العشرية|القسمة على عدد عشري|مسائل لفظية"],
+["ترتيب إجراء العمليات",62,"أولويات العمليات الحسابية|استخدام الأقواس|تبسيط العبارات العددية"]]],
+["الهندسة","📐",[
+["مفاهيم هندسية للدائرة – رسم الدائرة",76,"نصف القطر والقطر والوتر|رسم الدائرة بالفرجار"],
+["إنشاءات هندسية",79,"إنشاء زاوية مساوية لزاوية معلومة|منصّف القطعة المستقيمة|منصّف الزاوية"],
+["الزوايا المتقابلة بالرأس والزوايا المتجاورة",83,"الزوايا المتقابلة بالرأس|الزوايا المتجاورة|إيجاد زاوية مجهولة"],
+["مجموع قياسات الزوايا الداخلية للمثلث",91,"مجموع زوايا المثلث|إيجاد زاوية مجهولة|الزاوية الخارجية للمثلث"],
+["المضلعات ومجموع قياسات زوايا الشكل الرباعي",95,"المضلعات وأنواعها|مجموع زوايا الشكل الرباعي|إيجاد زاوية مجهولة"],
+["تصنيف الأشكال الرباعية",100,"متوازي الأضلاع والمعين|المستطيل والمربع|المنحرف وشبه المنحرف"],
+["حركة الأشكال الهندسية",106,"الانعكاس|الانسحاب|الدوران"],
+["خطوط التناظر",110,"تعيين خط التناظر|عدد خطوط التناظر|إكمال شكل متناظر"]]],
+["نظرية الأعداد وإدراك مفهوم الكسور","🧩",[
+["قابلية القسمة",127,"قواعد القسمة على ٢ و٣ و٥ و٩ و١٠|العوامل والمضاعفات"],
+["الأسس",132,"القراءة والكتابة بالأسس|حساب القوى"],
+["تحليل العدد إلى عوامله الأولية",136,"الأعداد الأولية والمركبة|شجرة العوامل|التحليل إلى عوامل أولية"],
+["العامل المشترك الأكبر",141,"العوامل المشتركة|ع.م.أ بالتحليل الأولي|مسائل لفظية"],
+["الكسور المتكافئة – الكسر في أبسط صورة",144,"الكسور المتكافئة|اختصار الكسر|الكسر في أبسط صورة"],
+["الكسور المركبة والأعداد الكسرية",149,"الكسر غير الفعلي|العدد الكسري|التحويل بينهما"],
+["ربط الكسور الاعتيادية بالكسور العشرية",153,"تحويل الكسر الاعتيادي إلى عشري|تحويل الكسر العشري إلى اعتيادي"],
+["المضاعف المشترك الأصغر",157,"المضاعفات المشتركة|م.م.أ بالتحليل|مسائل لفظية"],
+["مقارنة وترتيب الكسور العشرية والاعتيادية",160,"مقارنة الكسور الاعتيادية|المقارنة بين الكسر العشري والاعتيادي|الترتيب"]]],
+["العمليات على الكسور","➗",[
+["جمع الكسور والأعداد الكسرية ذات المقامات الموحدة وطرحها",174,"جمع الكسور بمقام موحد|طرح الكسور بمقام موحد|الأعداد الكسرية"],
+["جمع الكسور والأعداد الكسرية ذات المقامات المختلفة",179,"المقام المشترك|جمع الكسور المختلفة المقام|جمع الأعداد الكسرية"],
+["طرح الكسور والأعداد الكسرية ذات المقامات المختلفة",183,"طرح الكسور المختلفة المقام|طرح الأعداد الكسرية|الاستلاف"],
+["تقدير نواتج الجمع أو الطرح",187,"التقريب إلى أقرب نصف أو عدد صحيح|تقدير الجمع والطرح"],
+["ضرب الكسور",190,"ضرب كسر في عدد صحيح|ضرب كسر في كسر|الاختصار قبل الضرب"],
+["ضرب الأعداد الكسرية",194,"تحويل العدد الكسري|ضرب الأعداد الكسرية|مسائل لفظية"],
+["تقدير نواتج الضرب",197,"تقريب العوامل|تقدير الناتج ومعقوليته"],
+["استكشاف قسمة الكسور",200,"النماذج الشريطية للقسمة|العلاقة بين القسمة والضرب|المقلوب"],
+["قسمة الكسور",204,"قسمة كسر على عدد صحيح|قسمة كسر على كسر|مسائل لفظية"],
+["قسمة الأعداد الكسرية",207,"تحويل العدد الكسري|قسمة الأعداد الكسرية|مسائل لفظية"]]]]),
+7:U4([["الأعداد الكلية والأعداد العشرية والعمليات عليها","🔢",[
+["قراءة الأعداد الكلية والأعداد العشرية وكتابتها",20,"القيمة المكانية|قراءة الأعداد العشرية وكتابتها|الصيغة الممتدة"],
+["مقارنة الأعداد الكلية والأعداد العشرية وتقريبها",25,"المقارنة والترتيب|التقريب|مسائل حياتية"],
+["جمع الأعداد العشرية وطرحها",32,"الجمع|الطرح|مسائل لفظية"],
+["الحساب الذهني: خصائص الجمع",36,"الإبدالية والتجميعية|الحساب الذهني بالخصائص"],
+["ضرب عدد كلي أو عدد عشري في عدد عشري",41,"ضرب عدد في عدد عشري|وضع الفاصلة العشرية|مسائل لفظية"],
+["القسمة على عدد كلي أو عدد عشري",45,"القسمة على عدد كلي|القسمة على عدد عشري|مسائل لفظية"],
+["الحساب الذهني: خصائص الضرب",51,"الإبدالية والتجميعية|خاصية التوزيع|الحساب الذهني"]]],
+["ربط الحساب بالجبر","🧮",[
+["الأسس",68,"القراءة والكتابة بالأسس|حساب القوى|خواص الأسس"],
+["كتابة رموز الأعداد بالصورة العلمية (القياسية)",73,"الصورة العلمية|التحويل من وإلى الصورة العلمية"],
+["مربعات الأعداد الكلية والجذور التربيعية",77,"المربعات الكاملة|الجذر التربيعي|تقدير الجذور"],
+["ترتيب العمليات",81,"أولويات العمليات|الأقواس والأسس|تبسيط العبارات"],
+["المتغيرات والتعبيرات (المقادير) الجبرية وكتابتها",85,"المتغيرات|كتابة التعبير الجبري|التعويض والحساب"],
+["الأعداد الصحيحة",90,"مفهوم الأعداد الصحيحة|مقارنة وترتيب الأعداد الصحيحة|القيمة المطلقة"],
+["جمع الأعداد الصحيحة",94,"الجمع على خط الأعداد|قواعد الجمع|مسائل لفظية"],
+["طرح الأعداد الصحيحة",100,"الطرح كجمع للعدد المعاكس|قواعد الطرح|مسائل لفظية"],
+["ضرب الأعداد الصحيحة وقسمتها",105,"قواعد الإشارات في الضرب|قواعد الإشارات في القسمة"],
+["حل المعادلات (الجمع والطرح)",110,"المعادلة والحل|حل معادلات الجمع|حل معادلات الطرح"],
+["حل المعادلات (الضرب والقسمة)",114,"حل معادلات الضرب|حل معادلات القسمة|مسائل لفظية"],
+["حل معادلات على الصورة أ س + ب = ج، أ ≠ ٠",119,"حل معادلة من خطوتين|التحقق من الحل|مسائل لفظية"]]],
+["القياس والمجسمات","📐",[
+["المحيط",135,"محيط الأشكال المضلعة|محيط المستطيل والمربع|مسائل لفظية"],
+["مساحة متوازيات الأضلاع والمثلثات",139,"مساحة متوازي الأضلاع|مساحة المثلث|مسائل لفظية"],
+["مساحة شبه المنحرف",144,"قانون مساحة شبه المنحرف|إيجاد بُعد مجهول"],
+["الدائرة",148,"أجزاء الدائرة|محيط الدائرة|العدد π"],
+["محيط ومساحة المنطقة الدائرية",152,"مساحة الدائرة|مساحة القطاع|محيط المنطقة الدائرية"],
+["مساحة أشكال مستوية أخرى",159,"تجزئة الأشكال المركبة|مساحة الأشكال المركبة"],
+["تصنيف المجسمات",165,"المنشورات والأهرامات|الأسطوانة والمخروط والكرة|الأوجه والأحرف والرؤوس"],
+["مساحة السطح – القوانين الجبرية لمساحة السطح",170,"الشبكة (المنشور المفتوح)|مساحة سطح المنشور|قوانين المساحة"],
+["مساحة سطح الأسطوانة",175,"شبكة الأسطوانة|المساحة الجانبية والكلية|مسائل لفظية"]]],
+["هندسة التحويلات – علم الإحصاء","📊",[
+["المستوى الإحداثي",190,"الزوج المرتب|تعيين النقاط|الأرباع الأربعة"],
+["الانعكاس وخط التماثل",196,"الانعكاس في المحاور|خط التماثل"],
+["الإزاحة والتمثيل البياني للإزاحة",202,"الإزاحة في المستوى|التمثيل البياني للإزاحة"],
+["الدوران والتماثل الدوراني",207,"الدوران حول نقطة|التماثل الدوراني ورتبته"],
+["العلامات التكرارية والجداول التكرارية",211,"العلامات التكرارية|الجدول التكراري|قراءة البيانات"],
+["مخططات الساق والأوراق",216,"رسم مخطط الساق والأوراق|قراءة المخطط"],
+["المتوسط الحسابي (الوسط) والوسيط والمنوال",220,"المتوسط الحسابي|الوسيط|المنوال"]]]]),
+8:U4([["المجموعات والعلاقة","🧩",[
+["المجموعات",20,"مفهوم المجموعة وطرق التعبير عنها|المجموعة الخالية والمنتهية وغير المنتهية|عدد عناصر المجموعة"],
+["المجموعة الجزئية – تساوي مجموعتين",27,"المجموعة الجزئية|تساوي مجموعتين|عدد المجموعات الجزئية"],
+["العمليات على المجموعات (تقاطع – اتحاد)",33,"التقاطع|الاتحاد|تمثيل بمخطط فن"],
+["مجموعة الفرق",39,"مجموعة الفرق|تمثيلها بمخطط فن|مسائل"],
+["المجموعة الشاملة – المجموعة المتممة",44,"المجموعة الشاملة|المجموعة المتممة|مسائل"],
+["الحاصل الديكارتي",50,"الزوج المرتب|الحاصل الديكارتي لمجموعتين|التمثيل البياني"],
+["مفهوم العلاقة",55,"العلاقة من مجموعة إلى أخرى|المجال والمدى|تمثيل العلاقة"]]],
+["الأعداد النسبية","🔢",[
+["استكشاف الأعداد النسبية وتبسيطها",76,"مفهوم العدد النسبي|تبسيط العدد النسبي|تمثيله على خط الأعداد"],
+["مقارنة الأعداد النسبية وترتيبها وخواصها",82,"المقارنة|الترتيب|الخواص"],
+["جمع الأعداد النسبية",86,"جمع بمقام موحد|جمع بمقامات مختلفة|خواص الجمع"],
+["طرح الأعداد النسبية وخواصها",92,"طرح الأعداد النسبية|مسائل لفظية|الخواص"],
+["ضرب الأعداد النسبية",97,"الضرب|المعكوس الضربي|الخواص"],
+["قسمة الأعداد النسبية",103,"القسمة بالمقلوب|مسائل لفظية"],
+["الجذر التربيعي للعدد النسبي",108,"الجذر التربيعي للعدد النسبي|تقدير الجذور|مسائل"],
+["الجذر التكعيبي للعدد النسبي",114,"المكعب الكامل|الجذر التكعيبي|مسائل"]]],
+["الهندسة والقياس","📐",[
+["نظرية فيثاغورث وعكسها",130,"نظرية فيثاغورث|عكس نظرية فيثاغورث|مسائل تطبيقية"],
+["التطابق",139,"تطابق المضلعات|الأجزاء المتناظرة|خواص التطابق"],
+["تطابق مثلثين بثلاثة أضلاع",143,"حالة (ض ض ض)|إثبات التطابق"],
+["تطابق مثلثين بضلعين والزاوية المحصورة بينهما",148,"حالة (ض ز ض)|إثبات التطابق"],
+["تطابق مثلثين بزاويتين وضلع واصل بين رأسيهما",153,"حالة (ز ض ز)|إثبات التطابق"],
+["تطابق مثلثين قائمي الزاوية",157,"حالة الوتر وضلع|حالات تطابق القائمين"],
+["حجم المنشور القائم – حجم الأسطوانة الدائرية القائمة",163,"حجم المنشور القائم|حجم الأسطوانة|مسائل لفظية"],
+["حجم المخروط الدائري القائم",168,"قانون حجم المخروط|مسائل لفظية"]]],
+["النسبة والتناسب – التحويلات الهندسية","📊",[
+["حل التناسب (طردي – عكسي)",181,"التناسب الطردي|التناسب العكسي|مسائل لفظية"],
+["استخدام المعادلات لحل مسائل تتضمن نسبًا مئوية",187,"النسبة المئوية|كتابة معادلة النسبة|مسائل لفظية"],
+["النسبة المئوية التزايدية والنسبة المئوية التناقصية",191,"الزيادة المئوية|النقصان المئوي|مسائل حياتية"],
+["الانعكاس – التناظر حول نقطة",196,"الانعكاس في المستوى الإحداثي|التناظر حول نقطة"],
+["الإزاحة في المستوى الإحداثي",205,"الإزاحة|صورة نقطة أو شكل بالإزاحة|مسائل"]]]])};
+const GB={6:["السادس","#06b6d4","#3b82f6"],7:["السابع","#10b981","#06b6d4"],8:["الثامن","#f59e0b","#ef4444"],9:["التاسع","#8b5cf6","#ec4899"]};
+function gp(){$("#gp").innerHTML=Object.entries(GB).map(([g,v])=>{const B=BOOKS[g],n=B.reduce((s,u)=>s+u[5].length,0);return `<button class="gb${g==gcur?" on":""}" style="--c:${v[1]};--c2:${v[2]}" onclick="pick(${g})"><b>${ar(g)}</b><span>الصف ${v[0]}</span><small>${ar(B.length)} وحدات · ${ar(n)} درسًا</small></button>`}).join("")}
+function pick(g,q){gcur=g;D=BOOKS[g];cur=0;sel.clear();const nm=GB[g][0];$("#gr").value=nm;$("#sb").value="رياضيات";$("#sbo").hidden=true;if(!tdirty)$("#ttl").value="اختبار قصير – رياضيات "+nm;$("#sub").textContent=`رياضيات الصف ${nm} · الفصل الدراسي الأول 2026–2027 · القسم الأول`;gp();tabs();lessons();if(!q)$("#tabs").scrollIntoView({behavior:"smooth"})}
+function gsel(){const g=Object.keys(GB).find(k=>GB[k][0]==$("#gr").value);if(g)pick(+g,1);else{gcur=0;D=[];cur=0;sel.clear();gp();tabs();lessons()}}
+const GR=[["الأول","Grade 1"],["الثاني","Grade 2"],["الثالث","Grade 3"],["الرابع","Grade 4"],["الخامس","Grade 5"],["السادس","Grade 6"],["السابع","Grade 7"],["الثامن","Grade 8"],["التاسع","Grade 9"],["العاشر","Grade 10"],["الحادي عشر – علمي","Grade 11 – Scientific"],["الحادي عشر – أدبي","Grade 11 – Literary"],["الثاني عشر – علمي","Grade 12 – Scientific"],["الثاني عشر – أدبي","Grade 12 – Literary"]];
+let tdirty=0,gcur=9;
+async function pdf(a){
+ if(!window.html2pdf)return toast("خدمة PDF غير متاحة، استخدم الطباعة ثم «حفظ كـ PDF»");
+ let d=null;try{d=await claude.use("downloads")}catch(e){}
+ if(!d)return toast("الحفظ غير متاح هنا، استخدم الطباعة");
+ const p=$("#paper"),w=p.classList.contains("show");p.classList.toggle("show",!!a);toast("جارٍ إنشاء ملف PDF…");
+ try{const b=await html2pdf().set({margin:8,image:{type:"jpeg",quality:.95},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:"mm",format:"a4"},pagebreak:{mode:["css"],avoid:["li","h4"]}}).from(p).outputPdf("blob");await d.save({filename:a?"اختبار-مع-الإجابات.pdf":"اختبار-الطلاب.pdf",data:b})}catch(e){toast("تعذّر إنشاء PDF")}
+ p.classList.toggle("show",w)}
+
+$("#gr").innerHTML=GR.map(g=>`<option value="${g[0]}" data-e="${g[1]}">${g[0]}</option>`).join("");$("#gr").value="التاسع";tabs();lessons();types();pal();pv();gp();try{const z=JSON.parse(localStorage.hx||"{}");if(z.s)$("#sch").value=z.s;Object.assign(L,z.L||{})}catch(e){}
+</script>
+</body>
+</html>
